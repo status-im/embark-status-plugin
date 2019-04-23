@@ -1,26 +1,26 @@
-# Embark-Status Plugin Setup
-Embark-status is a plugin for [Embark](https://github.com/embark-framework/embark) that connects a DApp running in Embark to the [Status.im](https://github.com/status-im/status-react) mobile app. This plugin adds the Embark network (ie the blockchain node spun up by Embark) to the Status.im app, connects the Status app to the node, then opens the DApp in the Status app's DApp browser.
+# Embark-Status-plugin Setup
+Embark-status-plugin is a plugin for [Embark](https://github.com/embark-framework/embark) that connects a DApp running in Embark to the [Status.im](https://github.com/status-im/status-react) mobile app. This plugin adds the Embark network (ie the blockchain node spun up by Embark) to the Status.im app, connects the Status app to the node, then opens the DApp in the Status app's DApp browser.
 
 ## Installation
-In your DApp directory, install the embark-status plugin:
-```npm install status-im/embark-status --save-dev```
-> NOTE: Please do not install `embark-status` directly from npm as this is a very old package. We are working with the package owner to get this updated as soon as possible. If you have already installed via npm, please uninstall `embark-status` (`npm uninstall embark-status`) before installing using the above command. 
+In your DApp directory, install embark-status-plugin:
+```npm install embark-status-plugin --save-dev```
+> NOTE: Please do not install [`embark-status`](https://www.npmjs.com/package/embark-status) directly from npm as this is a very old package. We are working with the package owner to get this updated as soon as possible. If you have already installed via npm, please uninstall `embark-status` (`npm uninstall embark-status`) before installing using the above command. 
 
 ## DApp configuration
 Add this config in the DApp's `embark.json`:
 
 ```Json
   "plugins": {
-    "embark-status": {
+    "embark-status-plugin": {
       "deviceIp": "your-device-ip",
       "name": "MyDapp"
     }
   }
 ```
-If your DApp is hosted (ie on decentralised storage like IPFS or Swarm), the plugin option `dappUrl` can be specified to override the DApp URL that is opened in the Status DApp browser after `embark-status` is connected to the Status app.
+If your DApp is hosted (ie on decentralised storage like IPFS or Swarm), the plugin option `dappUrl` can be specified to override the DApp URL that is opened in the Status DApp browser after `embark-status-plugin` is connected to the Status app.
 ```Json
   "plugins": {
-    "embark-status": {
+    "embark-status-plugin": {
       "deviceIp": "your-device-ip",
       "name": "MyDapp",
       "dappUrl": "https://ipfs.io/ipfs/QmSVa32dFs5SKRmd7EXzuztMbNsZd5LGpCoU1keSrxo9BK"
@@ -42,7 +42,7 @@ In your DApp, set `config/webserver.js > host` to `0.0.0.0` (macOS/Linux) or `12
 > NOTE: When the Status browser opens the DApp, it will open the IP of the machine running Embark along with the port specified in the webserver config, ie `http://192.168.0.15:8000`. This is so that the device can connect to the webserver started by Embark.
 ### Storage
 Our machine will be running our storage node, and we need to access the node from our DApp, so we have to configure IPFS to run on our machine's IP, then tell embark to access the node via the machine IP.
-> NOTE: `embark-status` has only been tested with IPFS. This guide assumes you have [ipfs installed](https://docs.ipfs.io/introduction/install/) and you are using it for your DApp.
+> NOTE: `embark-status-plugin` has only been tested with IPFS. This guide assumes you have [ipfs installed](https://docs.ipfs.io/introduction/install/) and you are using it for your DApp.
 
 #### DApp storage config
 In your DApp, set `config/storage.js > dappConnection` to
@@ -120,7 +120,7 @@ embark run
 
 ## Known issues
 #### Status app crashes
-There is currently a [bug in the Status app](https://github.com/status-im/status-react/issues/6872) that crashes the app once the `embark-status` plugin attempts to open the DApp in the Status DApp browser. Simply re-open the Status app after this crash. You may have to manually open the DApp for now:
+There is currently a [bug in the Status app](https://github.com/status-im/status-react/issues/6872) that crashes the app once `embark-status-plugin` attempts to open the DApp in the Status DApp browser. Simply re-open the Status app after this crash. You may have to manually open the DApp for now:
 1. Tap the "+" in the top right of the Status app
 2. Tap "Open DApp"
 3. Enter `your-machine-ip:8000` for the URL.
